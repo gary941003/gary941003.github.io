@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>會跳的豬遊戲</title>
+  <style>
+    body {
+      background-color: #87CEEB; /* 背景顏色，藍天 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+    .game-container {
+      position: relative;
+      width: 800px;
+      height: 600px;
+      background-color: #98FB98; /* 草地背景 */
+      border: 3px solid #2E8B57;
+    }
+    .pig {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 100px;
+      height: 100px;
+      background-image: url('https://example.com/pig.png'); /* 請替換成豬的圖片 */
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.3s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+
+<div class="game-container">
+  <div class="pig" id="pig"></div>
+</div>
+
+<script>
+  // 獲取豬元素
+  const pig = document.getElementById('pig');
+  let isJumping = false;
+
+  // 控制豬跳躍的功能
+  function jump() {
+    if (isJumping) return;
+    isJumping = true;
+
+    // 初始跳躍
+    pig.style.transform = 'translateY(-200px)';
+
+    // 讓豬回到原位
+    setTimeout(() => {
+      pig.style.transform = 'translateY(0)';
+    }, 300);
+
+    // 重置跳躍狀態
+    setTimeout(() => {
+      isJumping = false;
+    }, 600);
+  }
+
+  // 點擊遊戲區域來讓豬跳躍
+  document.querySelector('.game-container').addEventListener('click', jump);
+</script>
+
+</body>
+</html>
