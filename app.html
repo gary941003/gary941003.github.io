@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>減脂App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>減脂App</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">首頁</a></li>
+                <li><a href="#food-log">食物日記</a></li>
+                <li><a href="#exercise">運動計劃</a></li>
+                <li><a href="#profile">我的資料</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <h2>今天的目標</h2>
+            <div class="goal-card">
+                <h3>卡路里目標</h3>
+                <p>目標：1500 卡路里</p>
+                <p>今日攝入：1200 卡路里</p>
+                <progress value="1200" max="1500"></progress>
+            </div>
+
+            <div class="goal-card">
+                <h3>運動目標</h3>
+                <p>目標：30 分鐘</p>
+                <p>今天完成：20 分鐘</p>
+                <progress value="20" max="30"></progress>
+            </div>
+        </section>
+
+        <section id="food-log">
+            <h2>食物日記</h2>
+            <div class="food-entry">
+                <p>早餐：燕麥粥 - 300 卡路里</p>
+                <p>午餐：雞胸肉沙拉 - 400 卡路里</p>
+                <p>晚餐：三文魚 - 500 卡路里</p>
+            </div>
+        </section>
+
+        <section id="exercise">
+            <h2>今日運動</h2>
+            <ul>
+                <li>跑步：15 分鐘</li>
+                <li>瑜伽：10 分鐘</li>
+            </ul>
+        </section>
+
+        <section id="profile">
+            <h2>我的資料</h2>
+            <p>姓名：張三</p>
+            <p>年齡：28 歲</p>
+            <p>身高：175 cm</p>
+            <p>體重：70 kg</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 減脂App | 版權所有</p>
+    </footer>
+</body>
+</html>
+CSS 代碼 (styles.css)
+css
+複製程式碼
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #3b8f29;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+.goal-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.goal-card h3 {
+    margin-bottom: 10px;
+}
+
+progress {
+    width: 100%;
+    height: 20px;
+}
+
+.food-entry {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #3b8f29;
+    color: white;
+}
