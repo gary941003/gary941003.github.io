@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>會跳的豬</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #87CEEB; /* 藍天背景 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .game-container {
+      position: relative;
+      width: 800px;
+      height: 600px;
+      background-color: #98FB98; /* 草地背景 */
+      border: 3px solid #2E8B57;
+    }
+
+    .pig {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 100px;
+      height: 100px;
+      background-image: url('https://example.com/pig.png'); /* 請替換成豬的圖片 */
+      background-size: cover;
+      background-position: center;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+<body>
+
+<div class="game-container">
+  <div class="pig" id="pig"></div>
+</div>
+
+<script>
+  const pig = document.getElementById('pig');
+  const gameContainer = document.querySelector('.game-container');
+  
+  const gameWidth = gameContainer.offsetWidth;
+  const gameHeight = gameContainer.offsetHeight;
+  const pigWidth = pig.offsetWidth;
+  const pigHeight = pig.offsetHeight;
+  
+  let posX = (gameWidth - pigWidth) / 2;  // 初始豬的X位置
+  let posY = gameHeight - pigHeight;      // 初始豬的Y位置
+  let velocityX = 2;                      // 豬的水平速度
+  let velocityY = -2;                     // 豬的垂直速度
+
+  // 設定豬初始位置
+  pig.style.left = `${posX}px`;
+  pig.style.bottom = `${posY}px`;
+
+  // 跳躍並在碰到邊框時停止
+  function updateGame() {
+    // 更新豬的位置
+    posX += velocityX;
+    posY += velocityY;
+
+    // 豬碰到左右邊界反彈
+    if (posX <= 0 || posX + pigWidth >= gameWidth) {
+      velocityX = -velocityX;
+    }
+
+    // 豬碰到上下邊界反彈
+    if (posY <= 0 || posY + pigHeight >= gameHeight) {
+      velocityY = -velocityY;
+    }
+
+    // 更新豬的顯示位置
+    pig.style.left = `${posX}px`;
+    pig.style.bottom = `${posY}px`;
+
+    // 使用requestAnimationFrame繼續動畫
+    requestAnimationFrame(updateGame);
+  }
+
+  // 開始遊戲
+  updateGame();
+</script>
+
+</body>
+</html>
