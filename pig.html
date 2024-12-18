@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會跳的豬</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #gameCanvas {
+            border: 2px solid #000;
+            background-color: #87CEEB;
+            display: block;
+        }
+
+        .game-over {
+            font-size: 30px;
+            font-weight: bold;
+            color: red;
+            text-align: center;
+        }
+
+        .instructions {
+            font-size: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="500" height="500"></canvas>
+    <div class="instructions">
+        <p>按空格鍵或上箭頭讓豬跳躍！</p>
+    </div>
+    <div class="game-over" id="gameOverText" style="display: none;">遊戲結束！按 F5 重啟</div>
+
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // 遊戲變數
+        const pigWidth = 50;
+        const pigHeight = 50;
+        let pigX = canvas.width / 2 - pigWidth / 2;
+        let pigY = canvas.height - pigHeight - 20;
+        let velocityY = 0;
+        let isJumping = false;
+        let isGameOver = false;
+        const gravity = 0.8;
+        const jumpStrength = -15;
+
+        // 控制豬跳躍
+        function jump() {
+            if (!isJumping && !isGameOver) {
+                isJumping = true;
+                velocityY = jumpStrength;
+            }
+        }
+
+        // 遊戲主循環
+        function gameLoop() {
+            if (isGameOver) return;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 更新豬的位置
+            velocityY += gravity;
+            pigY += velocityY;
+
+            // 防止豬掉出屏幕底部
+            if (pigY > canvas.height - pigHeight - 20) {
+                pigY = canvas.height - pigHeight - 20;
+                velocityY = 0;
+                isJumping = false;
+            }
+
+            // 畫豬
+            ctx.fillStyle = "#ff69b4";  // 粉紅色
+            ctx.fillRect(pigX, pigY, pigWidth, pigHeight);
+
+            // 檢查遊戲結束
+            if (pigY > canvas.height) {
+                gameOver();
+            }
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        // 遊戲結束
+        function gameOver() {
+            isGameOver = true;
+            document.getElementById("gameOverText").style.display = "block";
+        }
+
+        // 按鍵事件處理
+        window.addEventListener("keydown", function(event) {
+            if (event.code === "Space" || event.code === "ArrowUp") {
+                jump();
+            }
+        });
+
+        // 啟動遊戲
+        gameLoop();
+    </script>
+</body>
+</html>
