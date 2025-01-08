@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>減肥計劃 & 進度追蹤</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        header h1 {
+            margin: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #4CAF50;
+        }
+        ul {
+            line-height: 1.8;
+        }
+        .step {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .log-container {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>減肥計劃 & 進度追蹤</h1>
+        <p>追蹤你的減重進度，輕鬆記錄飲食與運動</p>
+    </header>
+
+    <div class="container">
+        <h2>減重計劃概覽</h2>
+        <p>以下步驟將幫助你達成減重5公斤的目標，並維持健康的生活方式：</p>
+        
+        <div class="step">
+            <h3>1. 設定具體且可衡量的目標</h3>
+            <p>設定一個明確的減重目標，例如「在2個月內減掉5公斤」。</p>
+        </div>
+
+        <div class="step">
+            <h3>2. 調整飲食習慣</h3>
+            <ul>
+                <li>減少熱量攝取，增加蛋白質與纖維的食物。</li>
+                <li>避免過多的糖分與高脂肪食物。</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>3. 計劃運動</h3>
+            <ul>
+                <li>每週進行3次以上的有氧運動。</li>
+                <li>結合力量訓練，每週2次。</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>4. 進行進度追蹤</h3>
+            <p>每週更新你的體重、運動與飲食狀況，觀察改變。</p>
+        </div>
+        
+        <div class="log-container">
+            <h3>運動與飲食紀錄</h3>
+            <label for="exercise-log">記錄今日運動：</label>
+            <input type="text" id="exercise-log" placeholder="例如：跑步 30 分鐘" />
+            <button onclick="addLog('exercise')">記錄運動</button>
+            <br/>
+            <label for="meal-log">記錄今日飲食：</label>
+            <input type="text" id="meal-log" placeholder="例如：早餐 燕麥粥" />
+            <button onclick="addLog('meal')">記錄飲食</button>
+
+            <h4>紀錄列表：</h4>
+            <div id="log-list"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 減肥計劃 - 所有權所有</p>
+    </footer>
+
+    <script>
+        const exerciseLog = [];
+        const mealLog = [];
+
+        function addLog(type) {
+            let logItem = '';
+            if (type === 'exercise') {
+                logItem = document.getElementById('exercise-log').value;
+                exerciseLog.push(logItem);
+            } else if (type === 'meal') {
+                logItem = document.getElementById('meal-log').value;
+                mealLog.push(logItem);
+            }
+
+            updateLogList();
+        }
+
+        function updateLogList() {
+            const logListContainer = document.getElementById('log-list');
+            logListContainer.innerHTML = '';
+
+            const allLogs = [...exerciseLog, ...mealLog];
+
+            allLogs.forEach((log, index) => {
+                const logItem = document.createElement('p');
+                logItem.textContent = log;
+                logListContainer.appendChild(logItem);
+            });
+        }
+    </script>
+</body>
+</html>
