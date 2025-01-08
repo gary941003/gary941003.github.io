@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>健康減肥計劃 APP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 2rem;
+            background-color: white;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        h3 {
+            color: #555;
+        }
+
+        form {
+            margin: 1rem 0;
+        }
+
+        input[type="number"], input[type="date"], button {
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #weight-log ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>健康減肥計劃：減肥 10 公斤</h1>
+    </header>
+
+    <div class="container">
+        <section id="goal-setting">
+            <h2>設定你的目標</h2>
+            <form id="goal-form">
+                <label for="target-weight">目標體重 (kg): </label>
+                <input type="number" id="target-weight" placeholder="輸入目標體重">
+                <button type="submit">設定目標</button>
+            </form>
+        </section>
+
+        <section id="progress-tracking">
+            <h2>進度追蹤</h2>
+            <form id="progress-form">
+                <label for="current-weight">當前體重 (kg): </label>
+                <input type="number" id="current-weight" placeholder="輸入當前體重">
+                <label for="date">日期: </label>
+                <input type="date" id="date">
+                <button type="submit">紀錄體重</button>
+            </form>
+
+            <div id="weight-log">
+                <h3>歷史紀錄</h3>
+                <ul id="log-list"></ul>
+            </div>
+        </section>
+
+        <section id="health-tips">
+            <h2>減肥小貼士</h2>
+            <p>記得遵循健康飲食原則，增加有氧運動，並保持充足的休息和睡眠。</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>健康減肥計劃，打造更健康的你！</p>
+    </footer>
+
+    <script>
+        // 記錄用戶設定的目標體重
+        let targetWeight = null;
+        const goalForm = document.getElementById('goal-form');
+        const targetWeightInput = document.getElementById('target-weight');
+        const progressForm = document.getElementById('progress-form');
+        const currentWeightInput = document.getElementById('current-weight');
+        const dateInput = document.getElementById('date');
+        const logList = document.getElementById('log-list');
+
+        // 目標設定功能
+        goalForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            targetWeight = parseFloat(targetWeightInput.value);
+            if (!isNaN(targetWeight)) {
+                alert(`您的目標體重大約是：${targetWeight} 公斤`);
+                targetWeightInput.value = ''; // 清空輸入框
+            } else {
+                alert('請輸入有效的目標體重');
+            }
+        });
+
+        // 進度紀錄功能
+        progressForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const currentWeight = parseFloat(currentWeightInput.value);
+            const date = dateInput.value;
+            
+            if (isNaN(currentWeight) || !date) {
+                alert('請填寫當前體重和日期');
+                return;
+            }
+
+            const logItem = document.createElement('li');
+            logItem.textContent = `日期: ${date} - 當前體重: ${currentWeight} kg`;
+            logList.appendChild(logItem);
+            
+            currentWeightInput.value = ''; // 清空輸入框
+            dateInput.value = ''; // 清空日期
+        });
+    </script>
+</body>
+</html>
